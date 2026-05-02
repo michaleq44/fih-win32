@@ -22,7 +22,7 @@ for arg in "$@"; do
 done
 
 mkdir -p build
-CMAKE_CMD="cmake -DCMAKE_BUILD_TYPE=\"$buildtype\" -DCMAKE_MAKE_PROGRAM=\"$buildcmd\" -DCMAKE_TOOLCHAIN_FILE=win32-toolchain.cmake -DCLANG=ON -G \"$generator\" -B build $cmakecmdline"
+CMAKE_CMD="cmake -DCMAKE_BUILD_TYPE=\"$buildtype\" -DCMAKE_MAKE_PROGRAM=\"$buildcmd\" -DCMAKE_TOOLCHAIN_FILE=win32-toolchain.cmake -G \"$generator\" -B build $cmakecmdline"
 eval "$CMAKE_CMD"
 
 echo "$buildcmd"
