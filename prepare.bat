@@ -1,8 +1,6 @@
 @echo off
-setlocal enabledelayexpansion
 
 set "buildtype=Debug"
-set "generator=Visual Studio 17 2022"
 set "cmakecmdline="
 
 :parse_args
@@ -24,7 +22,7 @@ if %errorlevel% neq 0 (
 )
 
 md build
-cmake -G "%generator" -T ClangCL -B build %cmakecmdline
+cmake -G "Visual Studio 17 2022" -T ClangCL -B build %cmakecmdline%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo Building %buildtype%...
