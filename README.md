@@ -52,3 +52,7 @@ Linux:
 - enter the build directory with `cd build`
 - execute your build tool: either `make` or `ninja`
 - there should be an output file `fih.exe`
+
+### Packaging:
+You can build packages using `cpack`, the tool bundled with CMake, to build redistributables.<br>
+They are also available in the 'Releases' tab on GitHub.
