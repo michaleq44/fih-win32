@@ -44,6 +44,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
     wc.hInstance = hInstance;
     wc.lpszClassName = WCLASS_NAME;
     wc.hbrBackground = NULL;
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 
     RegisterClass(&wc);
 
@@ -122,7 +123,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                     theight = (imgheight * winwidth) / imgwidth;
                 } else {
                     theight = winheight;
-                    twidth = (imgwidth * winheight) / imgwidth;
+                    twidth = (imgwidth * winheight) / imgheight;
                 }
 
                 int xpos = (winwidth - twidth) / 2;
