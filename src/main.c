@@ -6,12 +6,15 @@ int winwidth, winheight, imgwidth, imgheight;
 void* img;
 ULONG_PTR gdiToken;
 ULONGLONG lastRedrawTime;
+LPWSTR wintitle = NULL;
 
 int APIENTRY wWinMain(HINSTANCE hInstance,
                     HINSTANCE hPrevInstance,
                     LPWSTR lpCmdLine,
                     int nShowCmd)
 {
+    AttachParentConsole();
+
     int argc;
     LPWSTR *argv = CommandLineToArgvW(GetCommandLineW(), &argc);
     if (argv == NULL) {
@@ -25,10 +28,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
     }
 
     InitGDIPlus(&gdiToken);
-    for (int i = 1; i < argc; i++) {
-        img = LoadGDIImage(argv[i]);
-    }
-    LocalFree(argv);
+    img = LoadGDIImage(argv[1]);
 
     if (img == NULL) {
         fprintf(stderr, "Image loading failed\n");
@@ -47,10 +47,25 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
 
     RegisterClass(&wc);
 
+    LPCWSTR last_slash = wcsrchr(argv[1], L'\\');
+    LPCWSTR last_fslash = wcsrchr(argv[1], L'/');
+
+    LPCWSTR last = (last_slash > last_fslash) ? last_slash : last_fslash;
+
+    if (last == NULL) {
+        wintitle = malloc((lstrlenW(argv[1]) + 7) * sizeof(WCHAR));
+        wsprintf(wintitle, L"fih - %ls", argv[1]);
+    } else {
+        wintitle = malloc((lstrlenW(last + 1) + 7) * sizeof(WCHAR));
+        wsprintf(wintitle, L"fih - %ls", last + 1);
+    }
+
+    LocalFree(argv);
+
     HWND hwnd = CreateWindowEx(
         0,
         WCLASS_NAME,
-        L"fih",
+        wintitle,
         WS_OVERLAPPEDWINDOW | CS_OWNDC,
 
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
@@ -63,6 +78,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
 
     if (hwnd == NULL) {
         fprintf(stderr, "Window creation failed\n");
+        free(wintitle);
         ShutdownGDIPlus(gdiToken);
         return 1;
     }
@@ -137,6 +153,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
             }
 
             ShutdownGDIPlus(gdiToken);
+            free(wintitle);
             PostQuitMessage(0);
             return 0;
         }
@@ -151,9 +168,18 @@ void OnSize(HWND hwnd, UINT flag) {
     //fprintf(stderr, "%dx%d\n", winwidth, winheight);
     ULONGLONG currentTime = GetTickCount64();
 
-    if (currentTime - lastRedrawTime > REDRAW_TRESHOLD) {
+    if (currentTime - lastRedrawTime > REDRAW_THRESHOLD) {
         ResizeBackBuffer(winwidth, winheight);
         InvalidateRect(hwnd, NULL, FALSE);
         lastRedrawTime = currentTime;
+    }
+}
+
+void AttachParentConsole(void) {
+    if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+        FILE *fdummy;
+        freopen_s(&fdummy, "CONOUT$", "w", stdout);
+        freopen_s(&fdummy, "CONOUT$", "w", stderr);
+        freopen_s(&fdummy, "CONIN$", "r", stdin);
     }
 }

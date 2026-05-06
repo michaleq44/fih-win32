@@ -1,0 +1,41 @@
+#include <windows.h>
+
+MAINICON ICON "fih.ico"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,1,0,0
+PRODUCTVERSION  1,1,0,0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0x0L
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0" // Language: US English, Charset: Unicode
+        BEGIN
+            VALUE "FileDescription",  "FIH image viewer"
+            VALUE "ProductName",      "FIH image viewer"
+            VALUE "FileVersion",      "1.1.0"
+            VALUE "ProductVersion",   "1.1.0"
+            VALUE "InternalName",     "fih"
+            VALUE "OriginalFilename", "fih.exe"
+            VALUE "LegalCopyright",   "© 2026 michaleq44"
+        END
+        BLOCK "041504b0" // Language: Polish, Charset: Unicode
+        BEGIN
+            VALUE "FileDescription",  "FIH przeglądarka zdjęć"
+            VALUE "ProductName",      "FIH przeglądarka zdjęć"
+            VALUE "FileVersion",      "1.1.0"
+            VALUE "ProductVersion",   "1.1.0"
+            VALUE "InternalName",     "fih"
+            VALUE "OriginalFilename", "fih.exe"
+            VALUE "LegalCopyright",   "© 2026 michaleq44"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200, 0x415, 1200
+    END
+END

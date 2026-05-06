@@ -8,9 +8,8 @@
 #include <windows.h>
 #include <shellapi.h>
 
-#define REDRAW_TRESHOLD 16
-
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void OnSize(HWND, UINT);
+void AttachParentConsole(void);
 
 #endif

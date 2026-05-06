@@ -5,5 +5,6 @@
 
 extern const wchar_t WCLASS_NAME[];
 extern const char HELP_STRING[];
+extern const ULONGLONG REDRAW_THRESHOLD;
 
 #endif
