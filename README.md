@@ -40,7 +40,9 @@ Windows dependencies:
 Windows:
 - open the project directory in the **Developer Command Prompt for VS 2022**
 - execute `prepare.bat {flags}`
-- there should be an output file `fih.exe` in the `debug` or `release` subdirectory
+  - the flags can be `-r` to build Release instead of Debug and any CMake flags
+  you might want to pass through
+- there should be an output file `fih.exe` in the `Debug` or `Release` subdirectory depending on whether you used `-r`
 
 Linux:
 - in the project directory execute `./prepare.sh {flags}`
@@ -50,3 +52,7 @@ Linux:
 - enter the build directory with `cd build`
 - execute your build tool: either `make` or `ninja`
 - there should be an output file `fih.exe`
+
+### Packaging:
+You can build packages using `cpack`, the tool bundled with CMake, to build redistributables.<br>
+They are also available in the 'Releases' tab on GitHub.
