@@ -33,9 +33,6 @@ add_executable(fih WIN32 src/main.c
         ${RESOURCES})
 target_link_libraries(fih PRIVATE gdiplus gdi32 user32)
 target_compile_definitions(fih PRIVATE UNICODE _UNICODE)
-if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
-    set_target_properties(fih PROPERTIES LINK_FLAGS "${RC_OUTPUT}")
-endif()
 
 install(TARGETS fih RUNTIME DESTINATION .)
 install(FILES LICENSE README.md README.pl.md DESTINATION .)
