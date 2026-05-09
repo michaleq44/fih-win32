@@ -1,6 +1,6 @@
 #include "main.h"
 
-WNDCLASS wc;
+WNDCLASSEX wc;
 MSG msg;
 int winwidth, winheight, imgwidth, imgheight;
 void* img;
@@ -41,12 +41,15 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
     imgheight = imgsize.y;
 
     wc.lpfnWndProc = WndProc;
+    wc.cbSize = sizeof(WNDCLASSEX);
     wc.hInstance = hInstance;
     wc.lpszClassName = WCLASS_NAME;
     wc.hbrBackground = NULL;
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+    wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
-    RegisterClass(&wc);
+    RegisterClassEx(&wc);
 
     LPCWSTR last_slash = wcsrchr(argv[1], L'\\');
     LPCWSTR last_fslash = wcsrchr(argv[1], L'/');
