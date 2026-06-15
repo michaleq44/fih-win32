@@ -8,7 +8,7 @@ All it does is load images and display them.
 The program scales the image to fit into the window but doesn't stretch it to a bigger size than the original.
 #### Usage
 Execute: `fih.exe [your/image_path.png]`<br>
-The supported image formats are the ones supported by the Windows GDI+ libray:
+The supported image formats are the ones supported by the Windows GDI+ library:
 - BMP (.bmp)
 - PNG (.png)
 - JPEG (.jpg/.jpeg)
@@ -54,5 +54,5 @@ Linux:
 - there should be an output file `fih.exe`
 
 ### Packaging:
-You can build packages using `cpack`, the tool bundled with CMake, to build redistributables.<br>
+You can build packages using `cpack`, the tool bundled with CMake.<br>
 They are also available in the 'Releases' tab on GitHub.
