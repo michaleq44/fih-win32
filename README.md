@@ -1,4 +1,6 @@
 # fih-win32
+* **Author:** Michał Kulas<br>
+<br>
 
 [English](README.md) | [Polski](README.pl.md)
 <br>
